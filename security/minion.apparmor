@@ -1,0 +1,24 @@
+/usr/sbin/minion {
+	#include <abstractions/base>
+	#include <abstractions/nameservice>
+
+	/usr/sbin/minion r,
+	/etc/minion/* r,
+	/var/lib/minion/ r,
+	/var/lib/minion/minion.db rwk,
+	/var/run/minion.pid rw,
+
+	network inet stream,
+	network inet6 stream,
+	network inet dgram,
+	network inet6 dgram,
+
+	# For drop privileges
+	capability setgid,
+	capability setuid,
+
+	# For tcp-wrappers
+	/lib{,32,64}/libwrap.so*  rm,
+	/etc/hosts.allow r,
+	/etc/hosts.deny r,
+}
