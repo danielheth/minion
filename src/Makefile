@@ -3,9 +3,9 @@ LDFLAGS=-L../../lib ../libraries/mosquitto/lib/cpp/libmosquittopp.so.1 ../librar
 
 .PHONY: all clean
 
-all : minion
+all : openmqtt
 
-minion : main.o inireader.o ini.o minion.o
+openmqtt : main.o inireader.o ini.o openmqtt.o
 	${CXX} $^ -o $@ ${LDFLAGS}
 
 main.o : main.cpp
@@ -17,8 +17,8 @@ inireader.o : inireader.cpp
 ini.o : ini.cpp
 	${CXX} -c $^ -o $@ ${CFLAGS}
 
-minion.o : minion.cpp
+openmqtt.o : openmqtt.cpp
 	${CXX} -c $^ -o $@ ${CFLAGS}
 
 clean : 
-	-rm -f *.o minion
+	-rm -f *.o openmqtt

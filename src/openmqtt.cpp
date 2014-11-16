@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 Moran Inc <daniel@moranit.com>
+Copyright (c) 2014 OpenMqtt <daniel@openmqtt.org>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -30,19 +30,19 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <cstdio>
 #include <cstring>
 
-#include "minion.h"
+#include "openmqtt.h"
 #include <mosquittopp.h>
 
-mqtt_minion::mqtt_minion(const char *id, const char *host, int port) : mosquittopp(id)
+mqtt_openmqtt::mqtt_openmqtt(const char *id, const char *host, int port) : mosquittopp(id)
 {
 	int keepalive = 60;
 
 	/* Connect immediately. This could also be done by calling
-	 * mqtt_minion->connect(). */
+	 * mqtt_openmqtt->connect(). */
 	connect(host, port, keepalive);
 };
 
-void mqtt_minion::on_connect(int rc)
+void mqtt_openmqtt::on_connect(int rc)
 {
 	printf("Connected with code %d.\n", rc);
 	if(rc == 0){
@@ -51,7 +51,7 @@ void mqtt_minion::on_connect(int rc)
 	}
 }
 
-void mqtt_minion::on_message(const struct mosquitto_message *message)
+void mqtt_openmqtt::on_message(const struct mosquitto_message *message)
 {
 	double temp_celsius, temp_farenheit;
 	char buf[51];
@@ -67,7 +67,7 @@ void mqtt_minion::on_message(const struct mosquitto_message *message)
 	}
 }
 
-void mqtt_minion::on_subscribe(int mid, int qos_count, const int *granted_qos)
+void mqtt_openmqtt::on_subscribe(int mid, int qos_count, const int *granted_qos)
 {
 	printf("Subscription succeeded.\n");
 }

@@ -1,4 +1,4 @@
-; NSIS installer script for minion
+; NSIS installer script for openmqtt
 
 !include "MUI.nsh"
 
@@ -6,11 +6,11 @@
 !include "WinMessages.nsh"
 !define env_hklm 'HKLM "SYSTEM\CurrentControlSet\Control\Session Manager\Environment"'
 
-Name "Minion"
+Name "OpenMqtt"
 !define VERSION 0.0.1
-OutFile "minion-${VERSION}-install-win32.exe"
+OutFile "openmqtt-${VERSION}-install-win32.exe"
 
-InstallDir "$PROGRAMFILES\Minion"
+InstallDir "$PROGRAMFILES\OpenMqtt"
 
 ;--------------------------------
 ; Installer pages
@@ -39,9 +39,9 @@ InstallDir "$PROGRAMFILES\Minion"
 Section "Files" SecInstall
 	SectionIn RO
 	SetOutPath "$INSTDIR"
-	File "..\build\src\Release\minion.exe"
+	File "..\build\src\Release\openmqtt.exe"
 	File "..\ChangeLog.txt"
-	File "..\minion.conf"
+	File "..\openmqtt.conf"
 	File "..\readme.txt"
 	File "..\readme-windows.txt"
 	File "C:\pthreads\Pre-built.2\dll\x86\pthreadVC2.dll"
@@ -50,28 +50,28 @@ Section "Files" SecInstall
 	File "..\LICENSE.txt"
 		
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "DisplayName" "Minion"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "QuietUninstallString" "$\"$INSTDIR\Uninstall.exe$\" /S"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "HelpLink" "http://minion.org/"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "URLInfoAbout" "http://minion.org/"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "DisplayVersion" "${VERSION}"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "NoModify" "1"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion" "NoRepair" "1"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "DisplayName" "OpenMqtt"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "UninstallString" "$\"$INSTDIR\Uninstall.exe$\""
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "QuietUninstallString" "$\"$INSTDIR\Uninstall.exe$\" /S"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "HelpLink" "http://openmqtt.org/"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "URLInfoAbout" "http://openmqtt.org/"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "DisplayVersion" "${VERSION}"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "NoModify" "1"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt" "NoRepair" "1"
 
-	WriteRegExpandStr ${env_hklm} MINION_DIR $INSTDIR
+	WriteRegExpandStr ${env_hklm} OPENMQTT_DIR $INSTDIR
 	SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
 SectionEnd
 
 Section "Service" SecService
-	ExecWait '"$INSTDIR\minion.exe" install'
+	ExecWait '"$INSTDIR\openmqtt.exe" install'
 SectionEnd
 
 Section "Uninstall"
-	ExecWait '"$INSTDIR\minion.exe" uninstall'
-	Delete "$INSTDIR\minion.exe"
+	ExecWait '"$INSTDIR\openmqtt.exe" uninstall'
+	Delete "$INSTDIR\openmqtt.exe"
 	Delete "$INSTDIR\ChangeLog.txt"
-	Delete "$INSTDIR\minion.conf"
+	Delete "$INSTDIR\openmqtt.conf"
 	Delete "$INSTDIR\readme.txt"
 	Delete "$INSTDIR\readme-windows.txt"
 	Delete "$INSTDIR\pthreadVC2.dll"
@@ -81,14 +81,14 @@ Section "Uninstall"
 	
 	Delete "$INSTDIR\Uninstall.exe"
 	RMDir "$INSTDIR"
-	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Minion"
+	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OpenMqtt"
 
-	DeleteRegValue ${env_hklm} MINION_DIR
+	DeleteRegValue ${env_hklm} OPENMQTT_DIR
 	SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
 SectionEnd
 
 LangString DESC_SecInstall ${LANG_ENGLISH} "The main installation."
-LangString DESC_SecService ${LANG_ENGLISH} "Install Minion as a Windows service?"
+LangString DESC_SecService ${LANG_ENGLISH} "Install OpenMqtt as a Windows service?"
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
 	!insertmacro MUI_DESCRIPTION_TEXT ${SecInstall} $(DESC_SecInstall)
 	!insertmacro MUI_DESCRIPTION_TEXT ${SecService} $(DESC_SecService)

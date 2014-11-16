@@ -1,10 +1,10 @@
-# Mqtt
+# OpenMqtt
 OpenMqtt is striving to provide a management application for use across multiple platforms and uses the MQTT communications protocol.  The mqtt agent is being built to link into the OpenMqtt.org broker network and allow communications and control of millions of computers.
 
 ## Compiling Your Own Mqtt Agents
 Compiling is extremely easy but does require a few things.
 
-The following packages are required for minion:
+The following packages are required for openmqtt:
 
 * tcp-wrappers (optional, package name libwrap0-dev)
 * openssl (version 1.0.0 or greater if TLS-PSK support is needed)

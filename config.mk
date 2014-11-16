@@ -1,7 +1,7 @@
 # =============================================================================
 # User configuration section.
 #
-# Largely, these are options that are designed to make minion run
+# Largely, these are options that are designed to make openmqtt run
 # easily in restrictive environments by removing features.
 #
 # Modify the variable below to enable/disable features.
@@ -20,8 +20,8 @@
 # =============================================================================
 
 
-# Also bump lib/minion.h, lib/python/setup.py, CMakeLists.txt,
-# installer/minion.nsi, installer/minion-cygwin.nsi
+# Also bump lib/openmqtt.h, lib/python/setup.py, CMakeLists.txt,
+# installer/openmqtt.nsi, installer/openmqtt-cygwin.nsi
 VERSION=0.0.1
 TIMESTAMP:=$(shell date "+%F %T%z")
 
@@ -66,7 +66,7 @@ ifeq ($(UNAME),Linux)
 	LIB_LIBS:=$(LIB_LIBS) -lrt
 endif
 
-CLIENT_LDFLAGS:=$(LDFLAGS) -L../lib ../lib/libminion.so.${SOVERSION}
+CLIENT_LDFLAGS:=$(LDFLAGS) -L../lib ../lib/libopenmqtt.so.${SOVERSION}
 
 ifeq ($(UNAME),SunOS)
 	ifeq ($(CC),cc)
@@ -86,7 +86,7 @@ else
 endif
 
 ifneq ($(UNAME),SunOS)
-	LIB_LDFLAGS:=$(LIB_LDFLAGS) -Wl,--version-script=linker.version -Wl,-soname,libminion.so.$(SOVERSION)
+	LIB_LDFLAGS:=$(LIB_LDFLAGS) -Wl,--version-script=linker.version -Wl,-soname,libopenmqtt.so.$(SOVERSION)
 endif
 
 ifeq ($(UNAME),QNX)

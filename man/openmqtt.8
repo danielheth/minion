@@ -1,13 +1,13 @@
 '\" t
-.\"     Title: minion
+.\"     Title: openmqtt
 .\"    Author: [see the "Author" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
 .\"      Date: 07/26/2014
 .\"    Manual: System management commands
-.\"    Source: minion Project
+.\"    Source: openmqtt Project
 .\"  Language: English
 .\"
-.TH "MINION" "8" "07/26/2014" "minion Project" "System management commands"
+.TH "OPENMQTT" "8" "07/26/2014" "openmqtt Project" "System management commands"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,14 +31,14 @@
 	
 
 	.SH "NAME"
-minion \- an MQTT broker
+openmqtt \- an MQTT broker
 
 
 	.SH "SYNOPSIS"
 
-		.HP \w'\fBminion\fR\ 'u
+		.HP \w'\fBopenmqtt\fR\ 'u
 
-			\fBminion\fR
+			\fBopenmqtt\fR
 			 [\-c\ \fIconfig\ file\fR]
 			 [
 				 | \-d
@@ -54,7 +54,7 @@ minion \- an MQTT broker
 
 		
 		.PP
-\fBminion\fR
+\fBopenmqtt\fR
 is a broker for the MQTT protocol version 3\&.1\&.
 
 	
@@ -72,7 +72,7 @@ is a broker for the MQTT protocol version 3\&.1\&.
 				
 				
 					Load configuration from a file\&. If not given, the default values as described in
-\fBminion.conf\fR(5)
+\fBopenmqtt.conf\fR(5)
 are used\&.
 
 				
@@ -85,7 +85,7 @@ are used\&.
 				
 				
 					Run
-\fBminion\fR
+\fBopenmqtt\fR
 in the background as a daemon\&. All other behaviour remains the same\&.
 
 				
@@ -124,9 +124,9 @@ in the configuration file\&. This overrides and logging options given in the con
 		
 		.PP
 The broker can be configured using a configuration file as described in
-\fBminion.conf\fR(5)
-and this is the main point of information for minion\&. The files required for SSL/TLS support are described in
-\fBminion-tls\fR(7)\&.
+\fBopenmqtt.conf\fR(5)
+and this is the main point of information for openmqtt\&. The files required for SSL/TLS support are described in
+\fBopenmqtt-tls\fR(7)\&.
 
 	
 
@@ -238,7 +238,7 @@ is 0, then updates are not sent\&.
 
 				
 				
-					The current size of the heap memory in use by minion\&. Note that this topic may be unavailable depending on compile time options\&.
+					The current size of the heap memory in use by openmqtt\&. Note that this topic may be unavailable depending on compile time options\&.
 
 				
 			.RE
@@ -248,7 +248,7 @@ is 0, then updates are not sent\&.
 
 				
 				
-					The largest amount of heap memory used by minion\&. Note that this topic may be unavailable depending on compile time options\&.
+					The largest amount of heap memory used by openmqtt\&. Note that this topic may be unavailable depending on compile time options\&.
 
 				
 			.RE
@@ -389,7 +389,7 @@ is 0, then updates are not sent\&.
 				
 				
 					The total number of publish messages that have been dropped due to inflight/queuing limits\&. See the max_inflight_messages and max_queued_messages options in
-\fBminion.conf\fR(5)
+\fBopenmqtt.conf\fR(5)
 for more information\&.
 
 				
@@ -471,7 +471,7 @@ for more information\&.
 
 		
 		.PP
-In addition to allowing clients to subscribe to specific topics, minion also allows the use of two wildcards in subscriptions\&.
+In addition to allowing clients to subscribe to specific topics, openmqtt also allows the use of two wildcards in subscriptions\&.
 \fB+\fR
 is the wildcard used to match a single level of hierarchy\&. For example, for a topic of "a/b/c/d", the following example subscriptions will match:
 
@@ -658,7 +658,7 @@ Multiple brokers can be connected together with the bridging functionality\&. Th
 
 		.PP
 For information on configuring bridges, see
-\fBminion.conf\fR(5)\&.
+\fBopenmqtt.conf\fR(5)\&.
 
 	
 
@@ -673,10 +673,10 @@ SIGHUP
 
 				
 				
-					Upon receiving the SIGHUP signal, minion will attempt to reload configuration file data, assuming that the
+					Upon receiving the SIGHUP signal, openmqtt will attempt to reload configuration file data, assuming that the
 \fB\-c\fR
-argument was provided when minion was started\&. Not all configuration parameters can be reloaded without restarting\&. See
-\fBminion.conf\fR(5)
+argument was provided when openmqtt was started\&. Not all configuration parameters can be reloaded without restarting\&. See
+\fBopenmqtt.conf\fR(5)
 for details\&.
 
 				
@@ -687,7 +687,7 @@ SIGUSR1
 
 				
 				
-					Upon receiving the SIGUSR1 signal, minion will write the persistence database to disk\&. This signal is only acted upon if persistence is enabled\&.
+					Upon receiving the SIGUSR1 signal, openmqtt will write the persistence database to disk\&. This signal is only acted upon if persistence is enabled\&.
 
 				
 			.RE
@@ -697,7 +697,7 @@ SIGUSR2
 
 				
 				
-					The SIGUSR2 signal causes minion to print out the current subscription tree, along with information about where retained messages exist\&. This is intended as a testing feature only and may be removed at any time\&.
+					The SIGUSR2 signal causes openmqtt to print out the current subscription tree, along with information about where retained messages exist\&. This is intended as a testing feature only and may be removed at any time\&.
 
 				
 			.RE
@@ -710,18 +710,18 @@ SIGUSR2
 		
 
 			.PP
-/etc/minion/minion\&.conf
+/etc/openmqtt/openmqtt\&.conf
 .RS 4
 
 				
 				
 					Configuration file\&. See
-\fBminion.conf\fR(5)\&.
+\fBopenmqtt.conf\fR(5)\&.
 
 				
 			.RE
 			.PP
-/var/lib/minion/minion\&.db
+/var/lib/openmqtt/openmqtt\&.db
 .RS 4
 
 				
@@ -749,16 +749,16 @@ SIGUSR2
 
 		
 		.PP
-\fBminion\fR
+\fBopenmqtt\fR
 bug information can be found at
-http://launchpad\&.net/minion
+http://launchpad\&.net/openmqtt
 
 	
 
 	.SH "SEE ALSO"
 
 		
-		\fBmqtt\fR(7), \fBminion-tls\fR(7), \fBminion.conf\fR(5), \fBhosts_access\fR(5), \fBminion_passwd\fR(1), \fBminion_pub\fR(1), \fBminion_sub\fR(1), \fBlibminion\fR(3)
+		\fBmqtt\fR(7), \fBopenmqtt-tls\fR(7), \fBopenmqtt.conf\fR(5), \fBhosts_access\fR(5), \fBopenmqtt_passwd\fR(1), \fBopenmqtt_pub\fR(1), \fBopenmqtt_sub\fR(1), \fBlibopenmqtt\fR(3)
 
 	
 
@@ -769,7 +769,7 @@ http://launchpad\&.net/minion
 Thanks to Andy Stanford\-Clark for being one of the people who came up with MQTT in the first place\&. Thanks to Andy and Nicholas O\*(AqLeary for providing clarifications of the protocol\&.
 
 		.PP
-Thanks also to everybody at the Ubuntu UK Podcast and Linux Outlaws for organising OggCamp, where Andy gave a talk that inspired minion\&.
+Thanks also to everybody at the Ubuntu UK Podcast and Linux Outlaws for organising OggCamp, where Andy gave a talk that inspired openmqtt\&.
 
 	
 

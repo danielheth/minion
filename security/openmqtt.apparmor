@@ -1,12 +1,12 @@
-/usr/sbin/minion {
+/usr/sbin/openmqtt {
 	#include <abstractions/base>
 	#include <abstractions/nameservice>
 
-	/usr/sbin/minion r,
-	/etc/minion/* r,
-	/var/lib/minion/ r,
-	/var/lib/minion/minion.db rwk,
-	/var/run/minion.pid rw,
+	/usr/sbin/openmqtt r,
+	/etc/openmqtt/* r,
+	/var/lib/openmqtt/ r,
+	/var/lib/openmqtt/openmqtt.db rwk,
+	/var/run/openmqtt.pid rw,
 
 	network inet stream,
 	network inet6 stream,

@@ -1,4 +1,0 @@
-check process minion with pidfile /var/run/minion.pid
-	start = "/etc/init.d/minion start"
-	stop = "/etc/init.d/minion stop"
-

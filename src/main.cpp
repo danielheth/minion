@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 Moran Inc <daniel@moranit.com>
+Copyright (c) 2014 OpenMqtt <daniel@openmqtt.org>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -34,7 +34,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "ini.h"
 #include "inireader.h"
 #include <mosquittopp.h>
-#include "minion.h"
+#include "openmqtt.h"
 
 //#include <urlmon.h>
 
@@ -53,11 +53,11 @@ int main(int argc, char *argv[])
   int server_port;
   std::string server_cert;
   
-  INIReader reader("minion.conf");
+  INIReader reader("openmqtt.conf");
 
   if (reader.ParseError() < 0) {
-        //std::cout << "Can't load 'minion.conf'\n";
-        printf("Can't load 'minion.conf'!");
+        //std::cout << "Can't load 'openmqtt.conf'\n";
+        printf("Can't load 'openmqtt.conf'!");
         return 1;
   }
   server_url = reader.Get("SERVER", "url", "");
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
   }
 
   /*
-  std::cout << "Config loaded from 'minion.conf': "
+  std::cout << "Config loaded from 'openmqtt.conf': "
             << "url=" << reader.Get("SERVER", "url", "")
             << ", port=" << reader.GetInteger("SERVER", "port", -1)
             << ", cert=" << reader.Get("SERVER", "cert", "")
@@ -86,17 +86,17 @@ int main(int argc, char *argv[])
   //std::cout << "Done!" << endl;
 
 
-  class mqtt_minion *minion;
+  class mqtt_openmqtt *openmqtt;
   int rc;
 
   mosqpp::lib_init();
 
-  minion = new mqtt_minion("minion", server_url.c_str(), server_port);
+  openmqtt = new mqtt_openmqtt("openmqtt", server_url.c_str(), server_port);
   
   while(1){
-    rc = minion->loop();
+    rc = openmqtt->loop();
     if(rc){
-      minion->reconnect();
+      openmqtt->reconnect();
     }
   }
 

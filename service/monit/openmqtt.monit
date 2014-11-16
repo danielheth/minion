@@ -1,0 +1,4 @@
+check process openmqtt with pidfile /var/run/openmqtt.pid
+	start = "/etc/init.d/openmqtt start"
+	stop = "/etc/init.d/openmqtt stop"
+

@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2014 Moran Inc <daniel@moranit.com>
+Copyright (c) 2014 OpenMqtt <daniel@openmqtt.org>
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -27,16 +27,16 @@ ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 POSSIBILITY OF SUCH DAMAGE.
 */
 
-#ifndef MINION_H
-#define MINION_H
+#ifndef OPENMQTT_H
+#define OPENMQTT_H
 
 #include <mosquittopp.h>
 
-class mqtt_minion : public mosqpp::mosquittopp
+class mqtt_openmqtt : public mosqpp::mosquittopp
 {
 	public:
-		mqtt_minion(const char *id, const char *host, int port);
-		~mqtt_minion();
+		mqtt_openmqtt(const char *id, const char *host, int port);
+		~mqtt_openmqtt();
 
 		void on_connect(int rc);
 		void on_message(const struct mosquitto_message *message);

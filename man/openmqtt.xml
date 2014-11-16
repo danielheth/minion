@@ -1,22 +1,22 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="manpage.xsl"?>
 
-<refentry xml:id="minion" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="openmqtt" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<refmeta>
-		<refentrytitle>minion</refentrytitle>
+		<refentrytitle>openmqtt</refentrytitle>
 		<manvolnum>8</manvolnum>
-		<refmiscinfo class="source">minion Project</refmiscinfo>
+		<refmiscinfo class="source">openmqtt Project</refmiscinfo>
 		<refmiscinfo class="manual">System management commands</refmiscinfo>
 	</refmeta>
 
 	<refnamediv>
-		<refname>minion</refname>
+		<refname>openmqtt</refname>
 		<refpurpose>an MQTT broker</refpurpose>
 	</refnamediv>
 
 	<refsynopsisdiv>
 		<cmdsynopsis>
-			<command>minion</command>
+			<command>openmqtt</command>
 			<arg>-c <replaceable>config file</replaceable></arg>
 			<group>
 				<arg choice='plain'>-d</arg>
@@ -29,7 +29,7 @@
 
 	<refsect1>
 		<title>Description</title>
-		<para><command>minion</command> is a broker for the MQTT protocol version 3.1.</para>
+		<para><command>openmqtt</command> is a broker for the MQTT protocol version 3.1.</para>
 	</refsect1>
 
 	<refsect1>
@@ -39,14 +39,14 @@
 				<term><option>-c</option></term>
 				<term><option>--config-file</option></term>
 				<listitem>
-					<para>Load configuration from a file. If not given, the default values as described in <citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry> are used.</para>
+					<para>Load configuration from a file. If not given, the default values as described in <citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry> are used.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term><option>-d</option></term>
 				<term><option>--daemon</option></term>
 				<listitem>
-					<para>Run <command>minion</command> in the background as a daemon. All other behaviour remains the same.</para>
+					<para>Run <command>openmqtt</command> in the background as a daemon. All other behaviour remains the same.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
@@ -73,10 +73,10 @@
 		<title>Configuration</title>
 		<para>The broker can be configured using a configuration file as
 			described in
-			<citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
-			and this is the main point of information for minion.
+			<citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
+			and this is the main point of information for openmqtt.
 			The files required for SSL/TLS support are described in 
-			<citerefentry><refentrytitle>minion-tls</refentrytitle><manvolnum>7</manvolnum></citerefentry>.
+			<citerefentry><refentrytitle>openmqtt-tls</refentrytitle><manvolnum>7</manvolnum></citerefentry>.
 		</para>
 	</refsect1>
 
@@ -164,7 +164,7 @@
 				<term><option>$SYS/broker/heap/current size</option></term>
 				<listitem>
 					<para>The current size of the heap memory in use by
-					minion. Note that this topic may be unavailable
+					openmqtt. Note that this topic may be unavailable
 					depending on compile time options.</para>
 				</listitem>
 			</varlistentry>
@@ -172,7 +172,7 @@
 				<term><option>$SYS/broker/heap/maximum size</option></term>
 				<listitem>
 					<para>The largest amount of heap memory used by
-					minion. Note that this topic may be unavailable
+					openmqtt. Note that this topic may be unavailable
 					depending on compile time options.</para>
 				</listitem>
 			</varlistentry>
@@ -308,7 +308,7 @@
 						dropped due to inflight/queuing limits. See the
 						max_inflight_messages and max_queued_messages options
 						in
-						<citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
+						<citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
 						for more information.</para>
 				</listitem>
 			</varlistentry>
@@ -360,7 +360,7 @@
 	<refsect1>
 		<title>Wildcard Topic Subscriptions</title>
 		<para>In addition to allowing clients to subscribe to specific topics,
-		minion also allows the use of two wildcards in subscriptions.
+		openmqtt also allows the use of two wildcards in subscriptions.
 		<option>+</option> is the wildcard used to match a single level of
 		hierarchy. For example, for a topic of "a/b/c/d", the following example
 		subscriptions will match:</para>
@@ -410,7 +410,7 @@
 		local to each
 		broker.</para>
 		<para>For information on configuring bridges, see
-		<citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>.</para>
+		<citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>.</para>
 	</refsect1>
 
 	<refsect1>
@@ -419,19 +419,19 @@
 			<varlistentry>
 				<term>SIGHUP</term>
 				<listitem>
-					<para>Upon receiving the SIGHUP signal, minion will
+					<para>Upon receiving the SIGHUP signal, openmqtt will
 					attempt to reload configuration file data, assuming that
 					the <option>-c</option> argument was provided when
-					minion was started. Not all configuration parameters can
+					openmqtt was started. Not all configuration parameters can
 					be reloaded without restarting. See
-					<citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
+					<citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>
 					for details.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
 				<term>SIGUSR1</term>
 				<listitem>
-					<para>Upon receiving the SIGUSR1 signal, minion will
+					<para>Upon receiving the SIGUSR1 signal, openmqtt will
 					write the persistence database to disk. This signal is only
 					acted upon if persistence is enabled.</para>
 				</listitem>
@@ -439,7 +439,7 @@
 			<varlistentry>
 				<term>SIGUSR2</term>
 				<listitem>
-					<para>The SIGUSR2 signal causes minion to print out the
+					<para>The SIGUSR2 signal causes openmqtt to print out the
 					current subscription tree, along with information about
 					where retained messages exist. This is intended as a
 					testing feature only and may be removed at any time.</para>
@@ -452,13 +452,13 @@
 		<title>Files</title>
 		<variablelist>
 			<varlistentry>
-				<term><filename>/etc/minion/minion.conf</filename></term>
+				<term><filename>/etc/openmqtt/openmqtt.conf</filename></term>
 				<listitem>
-					<para>Configuration file. See <citerefentry><refentrytitle>minion.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>.</para>
+					<para>Configuration file. See <citerefentry><refentrytitle>openmqtt.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>.</para>
 				</listitem>
 			</varlistentry>
 			<varlistentry>
-				<term><filename>/var/lib/minion/minion.db</filename></term>
+				<term><filename>/var/lib/openmqtt/openmqtt.db</filename></term>
 				<listitem>
 					<para>Persistent message data storage location if persist enabled.</para>
 				</listitem>
@@ -475,7 +475,7 @@
 
 	<refsect1>
 		<title>Bugs</title>
-		<para><command>minion</command> bug information can be found at <uri type="webpage">http://launchpad.net/minion</uri></para>
+		<para><command>openmqtt</command> bug information can be found at <uri type="webpage">http://launchpad.net/openmqtt</uri></para>
 	</refsect1>
 
 	<refsect1>
@@ -489,13 +489,13 @@
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion-tls-7.html">minion-tls</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt-tls-7.html">openmqtt-tls</link></refentrytitle>
 					<manvolnum>7</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion-conf-5.html">minion.conf</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt-conf-5.html">openmqtt.conf</link></refentrytitle>
 					<manvolnum>5</manvolnum>
 				</citerefentry>
 			</member>
@@ -507,25 +507,25 @@
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion_passwd-1.html">minion_passwd</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt_passwd-1.html">openmqtt_passwd</link></refentrytitle>
 					<manvolnum>1</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion_pub-1.html">minion_pub</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt_pub-1.html">openmqtt_pub</link></refentrytitle>
 					<manvolnum>1</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion_sub-1.html">minion_sub</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt_sub-1.html">openmqtt_sub</link></refentrytitle>
 					<manvolnum>1</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="libminion-3.html">libminion</link></refentrytitle>
+					<refentrytitle><link xlink:href="libopenmqtt-3.html">libopenmqtt</link></refentrytitle>
 					<manvolnum>3</manvolnum>
 				</citerefentry>
 			</member>
@@ -539,7 +539,7 @@
 			O'Leary for providing clarifications of the protocol.</para>
 		<para>Thanks also to everybody at the Ubuntu UK Podcast and Linux
 			Outlaws for organising OggCamp, where Andy gave a talk that
-			inspired minion.</para>
+			inspired openmqtt.</para>
 	</refsect1>
 
 	<refsect1>

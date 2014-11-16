@@ -1,32 +1,32 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <?xml-stylesheet type="text/xsl" href="manpage.xsl"?>
 
-<refentry xml:id="minion.conf" xmlns:xlink="http://www.w3.org/1999/xlink">
+<refentry xml:id="openmqtt.conf" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<refmeta>
-		<refentrytitle>minion.conf</refentrytitle>
+		<refentrytitle>openmqtt.conf</refentrytitle>
 		<manvolnum>5</manvolnum>
-		<refmiscinfo class="source">minion Project</refmiscinfo>
+		<refmiscinfo class="source">openmqtt Project</refmiscinfo>
 		<refmiscinfo class="manual">File formats and conventions</refmiscinfo>
 	</refmeta>
 
 	<refnamediv>
-		<refname>minion.conf</refname>
-		<refpurpose>the configuration file for minion</refpurpose>
+		<refname>openmqtt.conf</refname>
+		<refpurpose>the configuration file for openmqtt</refpurpose>
 	</refnamediv>
 
 	<refsynopsisdiv>
 		<cmdsynopsis>
-			<command>minion.conf</command>
+			<command>openmqtt.conf</command>
 		</cmdsynopsis>
 	</refsynopsisdiv>
 
 	<refsect1>
 		<title>Description</title>
-		<para><command>minion.conf</command> is the configuration file for
-		minion. This file can reside anywhere as long as minion can read
-		it. By default, minion does not need a configuration file and will
+		<para><command>openmqtt.conf</command> is the configuration file for
+		openmqtt. This file can reside anywhere as long as openmqtt can read
+		it. By default, openmqtt does not need a configuration file and will
 		use the default values listed below. See
-		<citerefentry><refentrytitle>minion</refentrytitle><manvolnum>8</manvolnum></citerefentry>
+		<citerefentry><refentrytitle>openmqtt</refentrytitle><manvolnum>8</manvolnum></citerefentry>
 		for information on how to load a configuration file.</para>
 	</refsect1>
 
@@ -167,7 +167,7 @@
 						topic that matches both subscriptions, such as
 						foo/bar/baz, then the client should only receive the
 						message once.</para>
-					<para>minion keeps track of which clients a message has
+					<para>openmqtt keeps track of which clients a message has
 						been sent to in order to meet this requirement. This
 						option allows this behaviour to be disabled, which may
 						be useful if you have a large number of clients
@@ -203,10 +203,10 @@
 			<varlistentry>
 				<term><option>autosave_interval</option> <replaceable>seconds</replaceable></term>
 				<listitem>
-					<para>The number of seconds that minion will wait
+					<para>The number of seconds that openmqtt will wait
 						between each time it saves the in-memory database to
 						disk. If set to 0, the in-memory database will only be
-						saved when minion exits or when receiving the
+						saved when openmqtt exits or when receiving the
 						SIGUSR1 signal. Note that this setting only has an
 						effect if persistence is enabled.  Defaults to 1800
 						seconds (30 minutes).</para>
@@ -216,12 +216,12 @@
 			<varlistentry>
 				<term><option>autosave_on_changes</option> [ true | false ]</term>
 				<listitem>
-					<para>If <replaceable>true</replaceable>, minion will
+					<para>If <replaceable>true</replaceable>, openmqtt will
 						count the number of subscription changes, retained
 						messages received and queued messages and if the total
 						exceeds <option>autosave_interval</option> then the
 						in-memory database will be saved to disk. If
-						<replaceable>false</replaceable>, minion will save
+						<replaceable>false</replaceable>, openmqtt will save
 						the in-memory database to disk by treating
 						<option>autosave_interval</option> as a time in
 						seconds.</para>
@@ -287,7 +287,7 @@
 						$SYS/broker/log/M/unsubscribe.</para>
 					<para>The <option>file</option> destination requires an
 						additional parameter which is the file to be logged to,
-						e.g. "log_dest file /var/log/minion.log". The file
+						e.g. "log_dest file /var/log/openmqtt.log". The file
 						will be closed and reopened when the broker receives a
 						HUP signal. Only a single file destination may be
 						configured.</para>
@@ -373,8 +373,8 @@
 					<para>Set the path to a password file. If defined, the
 						contents of the file are used to control client access
 						to the broker. The file can be created using the
-						<citerefentry><refentrytitle>minion_passwd</refentrytitle><manvolnum>1</manvolnum></citerefentry>
-						utility. If minion is compiled without TLS support
+						<citerefentry><refentrytitle>openmqtt_passwd</refentrytitle><manvolnum>1</manvolnum></citerefentry>
+						utility. If openmqtt is compiled without TLS support
 						(it is recommended that TLS support is included), then
 						the password file should be a text file with each line
 						in the format "username:password", where the colon and
@@ -393,20 +393,20 @@
 						Clients that are already connected will not be
 						affected.</para>
 					<para>See also
-						<citerefentry><refentrytitle>minion_passwd</refentrytitle><manvolnum>1</manvolnum></citerefentry>.</para>
+						<citerefentry><refentrytitle>openmqtt_passwd</refentrytitle><manvolnum>1</manvolnum></citerefentry>.</para>
 				</listitem> </varlistentry>
 			<varlistentry>
 				<term><option>persistence</option> [ true | false ]</term>
 				<listitem>
 					<para>If <replaceable>true</replaceable>, connection,
 						subscription and message data will be written to the
-						disk in minion.db at the location dictated by
-						persistence_location. When minion is restarted, it
-						will reload the information stored in minion.db. The
-						data will be written to disk when minion closes and
+						disk in openmqtt.db at the location dictated by
+						persistence_location. When openmqtt is restarted, it
+						will reload the information stored in openmqtt.db. The
+						data will be written to disk when openmqtt closes and
 						also at periodic intervals as defined by
 						autosave_interval. Writing of the persistence database
-						may also be forced by sending minion the SIGUSR1
+						may also be forced by sending openmqtt the SIGUSR1
 						signal. If <replaceable>false</replaceable>, the data
 						will be stored in memory only. Defaults to
 						<replaceable>false</replaceable>.</para>
@@ -417,7 +417,7 @@
 				<term><option>persistence_file</option> <replaceable>file name</replaceable></term>
 				<listitem>
 					<para>The filename to use for the persistent database.
-						Defaults to minion.db.</para>
+						Defaults to openmqtt.db.</para>
 					<para>Reloaded on reload signal.</para>
 				</listitem>
 			</varlistentry>
@@ -460,13 +460,13 @@
 				<listitem>
 					<para>Write a pid file to the file specified. If not given
 						(the default), no pid file will be written. If the pid
-						file cannot be written, minion will exit. This
-						option only has an effect is minion is run in daemon
+						file cannot be written, openmqtt will exit. This
+						option only has an effect is openmqtt is run in daemon
 						mode.</para>
-					<para>If minion is being automatically started by an
+					<para>If openmqtt is being automatically started by an
 						init script it will usually be required to write a pid
 						file. This should then be configured as e.g.
-						/var/run/minion.pid</para>
+						/var/run/openmqtt.pid</para>
 					<para>Not reloaded on reload signal.</para>
 				</listitem>
 			</varlistentry>
@@ -513,7 +513,7 @@
 				<term><option>retry_interval</option> <replaceable>seconds</replaceable></term>
 				<listitem>
 					<para>The integer number of seconds after a QoS=1 or QoS=2
-						message has been sent that minion will wait before
+						message has been sent that openmqtt will wait before
 						retrying when no response is received. If unset,
 						defaults to 20 seconds.</para>
 					<para>Reloaded on reload signal.</para>
@@ -564,14 +564,14 @@
 				<term><option>user</option> <replaceable>username</replaceable></term>
 				<listitem>
 					<para>When run as root, change to this user and its primary
-						group on startup.  If minion is unable to change to
+						group on startup.  If openmqtt is unable to change to
 						this user and group, it will exit with an error. The
 						user specified must have read/write access to the
 						persistence database if it is to be written. If run as
 						a non-root user, this setting has no effect. Defaults
-						to minion.</para>
+						to openmqtt.</para>
 					<para>This setting has no effect on Windows and so you
-						should run minion as the user you wish it to run
+						should run openmqtt as the user you wish it to run
 						as.</para>
 					<para>Not reloaded on reload signal.</para>
 				</listitem>
@@ -581,7 +581,7 @@
 
 	<refsect1>
 		<title>Listeners</title>
-		<para>The network ports that minion listens on can be controlled
+		<para>The network ports that openmqtt listens on can be controlled
 			using listeners. The default listener options can be overridden and
 			further listeners can be created.</para>
 		<refsect2>
@@ -593,7 +593,7 @@
 						<para>Listen for incoming network connections on the
 							specified IP address/hostname only. This is useful
 							to restrict access to certain network interfaces.
-							To restrict access to minion to the local host
+							To restrict access to openmqtt to the local host
 							only, use "bind_address localhost". This only
 							applies to the default listener. Use the listener
 							variable to control other listeners.</para>
@@ -622,7 +622,7 @@
 							the current listener. Set to <literal>-1</literal>
 							to have "unlimited" connections. Note that other
 							limits may be imposed that are outside the control
-							of minion.  See e.g.
+							of openmqtt.  See e.g.
 							<citerefentry><refentrytitle>limits.conf</refentrytitle><manvolnum>5</manvolnum></citerefentry>.</para>
 						<para>Not reloaded on reload signal.</para>
 					</listitem>
@@ -986,7 +986,7 @@
 						<replaceable>automatic</replaceable>, <replaceable>lazy
 						</replaceable>and <replaceable>once</replaceable>. Note
 						that RSMB provides a fourth start type "manual" which
-						isn't currently supported by minion.</para>
+						isn't currently supported by openmqtt.</para>
 
 					<para><replaceable>automatic</replaceable> is the default
 						start type and means that the bridge connection will be
@@ -1095,16 +1095,16 @@ topic # both 2 local/topic/ remote/topic/</programlisting>
 
 					<example title="Bridge Topic Remapping" label="Bridge Topic Remapping">
 						<para>The configuration below connects a bridge to the
-							broker at <option>test.minion.org</option>. It
+							broker at <option>test.openmqtt.org</option>. It
 							subscribes to the remote topic
 							<option>$SYS/broker/clients/total</option> and
 							republishes the messages received to the local topic
-							<option>test/minion/org/clients/total</option></para>
+							<option>test/openmqtt/org/clients/total</option></para>
 						<programlisting language="config">
-connection test-minion-org
-address test.minion.org
+connection test-openmqtt-org
+address test.openmqtt.org
 cleansession true
-topic clients/total in 0 test/minion/org $SYS/broker/
+topic clients/total in 0 test/openmqtt/org $SYS/broker/
 </programlisting></example>
 
 				</listitem>
@@ -1247,13 +1247,13 @@ topic clients/total in 0 test/minion/org $SYS/broker/
 
 	<refsect1>
 		<title>Files</title>
-		<para>minion.conf</para>
+		<para>openmqtt.conf</para>
 	</refsect1>
 
 	<refsect1>
 		<title>Bugs</title>
-		<para><command>minion</command> bug information can be found at <uri
-		type="webpage">http://launchpad.net/minion</uri></para>
+		<para><command>openmqtt</command> bug information can be found at <uri
+		type="webpage">http://launchpad.net/openmqtt</uri></para>
 	</refsect1>
 
 	<refsect1>
@@ -1261,19 +1261,19 @@ topic clients/total in 0 test/minion/org $SYS/broker/
 		<simplelist type="inline">
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion-8.html">minion</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt-8.html">openmqtt</link></refentrytitle>
 					<manvolnum>8</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion_passwd-1.html">minion_passwd</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt_passwd-1.html">openmqtt_passwd</link></refentrytitle>
 					<manvolnum>1</manvolnum>
 				</citerefentry>
 			</member>
 			<member>
 				<citerefentry>
-					<refentrytitle><link xlink:href="minion-tls-7.html">minion-tls</link></refentrytitle>
+					<refentrytitle><link xlink:href="openmqtt-tls-7.html">openmqtt-tls</link></refentrytitle>
 					<manvolnum>7</manvolnum>
 				</citerefentry>
 			</member>

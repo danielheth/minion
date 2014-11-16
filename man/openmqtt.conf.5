@@ -1,13 +1,13 @@
 '\" t
-.\"     Title: minion.conf
+.\"     Title: openmqtt.conf
 .\"    Author: [see the "Author" section]
 .\" Generator: DocBook XSL Stylesheets v1.78.1 <http://docbook.sf.net/>
 .\"      Date: 07/26/2014
 .\"    Manual: File formats and conventions
-.\"    Source: minion Project
+.\"    Source: openmqtt Project
 .\"  Language: English
 .\"
-.TH "MINION\&.CONF" "5" "07/26/2014" "minion Project" "File formats and conventions"
+.TH "OPENMQTT\&.CONF" "5" "07/26/2014" "openmqtt Project" "File formats and conventions"
 .\" -----------------------------------------------------------------
 .\" * Define some portability stuff
 .\" -----------------------------------------------------------------
@@ -31,14 +31,14 @@
 	
 
 	.SH "NAME"
-minion.conf \- the configuration file for minion
+openmqtt.conf \- the configuration file for openmqtt
 
 
 	.SH "SYNOPSIS"
 
-		.HP \w'\fBminion\&.conf\fR\ 'u
+		.HP \w'\fBopenmqtt\&.conf\fR\ 'u
 
-			\fBminion\&.conf\fR
+			\fBopenmqtt\&.conf\fR
 		
 
 	
@@ -47,9 +47,9 @@ minion.conf \- the configuration file for minion
 
 		
 		.PP
-\fBminion\&.conf\fR
-is the configuration file for minion\&. This file can reside anywhere as long as minion can read it\&. By default, minion does not need a configuration file and will use the default values listed below\&. See
-\fBminion\fR(8)
+\fBopenmqtt\&.conf\fR
+is the configuration file for openmqtt\&. This file can reside anywhere as long as openmqtt can read it\&. By default, openmqtt does not need a configuration file and will use the default values listed below\&. See
+\fBopenmqtt\fR(8)
 for information on how to load a configuration file\&.
 
 	
@@ -221,7 +221,7 @@ then another means of connection should be created to control authenticated clie
 					If a client is subscribed to multiple subscriptions that overlap, e\&.g\&. foo/# and foo/+/baz , then MQTT expects that when the broker receives a message on a topic that matches both subscriptions, such as foo/bar/baz, then the client should only receive the message once\&.
 .sp
 
-					minion keeps track of which clients a message has been sent to in order to meet this requirement\&. This option allows this behaviour to be disabled, which may be useful if you have a large number of clients subscribed to the same set of topics and want to minimise memory usage\&.
+					openmqtt keeps track of which clients a message has been sent to in order to meet this requirement\&. This option allows this behaviour to be disabled, which may be useful if you have a large number of clients subscribed to the same set of topics and want to minimise memory usage\&.
 .sp
 
 					It can be safely set to
@@ -266,7 +266,7 @@ if you know in advance that your clients will never have overlapping subscriptio
 
 				
 				
-					The number of seconds that minion will wait between each time it saves the in\-memory database to disk\&. If set to 0, the in\-memory database will only be saved when minion exits or when receiving the SIGUSR1 signal\&. Note that this setting only has an effect if persistence is enabled\&. Defaults to 1800 seconds (30 minutes)\&.
+					The number of seconds that openmqtt will wait between each time it saves the in\-memory database to disk\&. If set to 0, the in\-memory database will only be saved when openmqtt exits or when receiving the SIGUSR1 signal\&. Note that this setting only has an effect if persistence is enabled\&. Defaults to 1800 seconds (30 minutes)\&.
 .sp
 
 					Reloaded on reload signal\&.
@@ -280,10 +280,10 @@ if you know in advance that your clients will never have overlapping subscriptio
 				
 				
 					If
-\fItrue\fR, minion will count the number of subscription changes, retained messages received and queued messages and if the total exceeds
+\fItrue\fR, openmqtt will count the number of subscription changes, retained messages received and queued messages and if the total exceeds
 \fBautosave_interval\fR
 then the in\-memory database will be saved to disk\&. If
-\fIfalse\fR, minion will save the in\-memory database to disk by treating
+\fIfalse\fR, openmqtt will save the in\-memory database to disk by treating
 \fBautosave_interval\fR
 as a time in seconds\&.
 .sp
@@ -352,7 +352,7 @@ uses the userspace syslog facility which usually ends up in /var/log/messages or
 
 					The
 \fBfile\fR
-destination requires an additional parameter which is the file to be logged to, e\&.g\&. "log_dest file /var/log/minion\&.log"\&. The file will be closed and reopened when the broker receives a HUP signal\&. Only a single file destination may be configured\&.
+destination requires an additional parameter which is the file to be logged to, e\&.g\&. "log_dest file /var/log/openmqtt\&.log"\&. The file will be closed and reopened when the broker receives a HUP signal\&. Only a single file destination may be configured\&.
 .sp
 
 					Use "log_dest none" if you wish to disable logging\&. Defaults to stderr\&. This option may be specified multiple times\&.
@@ -451,8 +451,8 @@ option\&.
 				
 				
 					Set the path to a password file\&. If defined, the contents of the file are used to control client access to the broker\&. The file can be created using the
-\fBminion_passwd\fR(1)
-utility\&. If minion is compiled without TLS support (it is recommended that TLS support is included), then the password file should be a text file with each line in the format "username:password", where the colon and password are optional but recommended\&. If
+\fBopenmqtt_passwd\fR(1)
+utility\&. If openmqtt is compiled without TLS support (it is recommended that TLS support is included), then the password file should be a text file with each line in the format "username:password", where the colon and password are optional but recommended\&. If
 \fBallow_anonymous\fR
 is set to
 \fIfalse\fR, only users defined in this file will be able to connect\&. Setting
@@ -467,7 +467,7 @@ when
 .sp
 
 					See also
-\fBminion_passwd\fR(1)\&.
+\fBopenmqtt_passwd\fR(1)\&.
 
 				 .RE
 			.PP
@@ -477,7 +477,7 @@ when
 				
 				
 					If
-\fItrue\fR, connection, subscription and message data will be written to the disk in minion\&.db at the location dictated by persistence_location\&. When minion is restarted, it will reload the information stored in minion\&.db\&. The data will be written to disk when minion closes and also at periodic intervals as defined by autosave_interval\&. Writing of the persistence database may also be forced by sending minion the SIGUSR1 signal\&. If
+\fItrue\fR, connection, subscription and message data will be written to the disk in openmqtt\&.db at the location dictated by persistence_location\&. When openmqtt is restarted, it will reload the information stored in openmqtt\&.db\&. The data will be written to disk when openmqtt closes and also at periodic intervals as defined by autosave_interval\&. Writing of the persistence database may also be forced by sending openmqtt the SIGUSR1 signal\&. If
 \fIfalse\fR, the data will be stored in memory only\&. Defaults to
 \fIfalse\fR\&.
 .sp
@@ -492,7 +492,7 @@ when
 
 				
 				
-					The filename to use for the persistent database\&. Defaults to minion\&.db\&.
+					The filename to use for the persistent database\&. Defaults to openmqtt\&.db\&.
 .sp
 
 					Reloaded on reload signal\&.
@@ -578,10 +578,10 @@ persistent_client_expiration 1y
 
 				
 				
-					Write a pid file to the file specified\&. If not given (the default), no pid file will be written\&. If the pid file cannot be written, minion will exit\&. This option only has an effect is minion is run in daemon mode\&.
+					Write a pid file to the file specified\&. If not given (the default), no pid file will be written\&. If the pid file cannot be written, openmqtt will exit\&. This option only has an effect is openmqtt is run in daemon mode\&.
 .sp
 
-					If minion is being automatically started by an init script it will usually be required to write a pid file\&. This should then be configured as e\&.g\&. /var/run/minion\&.pid
+					If openmqtt is being automatically started by an init script it will usually be required to write a pid file\&. This should then be configured as e\&.g\&. /var/run/openmqtt\&.pid
 .sp
 
 					Not reloaded on reload signal\&.
@@ -640,7 +640,7 @@ option\&.
 
 				
 				
-					The integer number of seconds after a QoS=1 or QoS=2 message has been sent that minion will wait before retrying when no response is received\&. If unset, defaults to 20 seconds\&.
+					The integer number of seconds after a QoS=1 or QoS=2 message has been sent that openmqtt will wait before retrying when no response is received\&. If unset, defaults to 20 seconds\&.
 .sp
 
 					Reloaded on reload signal\&.
@@ -699,10 +699,10 @@ is set
 
 				
 				
-					When run as root, change to this user and its primary group on startup\&. If minion is unable to change to this user and group, it will exit with an error\&. The user specified must have read/write access to the persistence database if it is to be written\&. If run as a non\-root user, this setting has no effect\&. Defaults to minion\&.
+					When run as root, change to this user and its primary group on startup\&. If openmqtt is unable to change to this user and group, it will exit with an error\&. The user specified must have read/write access to the persistence database if it is to be written\&. If run as a non\-root user, this setting has no effect\&. Defaults to openmqtt\&.
 .sp
 
-					This setting has no effect on Windows and so you should run minion as the user you wish it to run as\&.
+					This setting has no effect on Windows and so you should run openmqtt as the user you wish it to run as\&.
 .sp
 
 					Not reloaded on reload signal\&.
@@ -716,7 +716,7 @@ is set
 
 		
 		.PP
-The network ports that minion listens on can be controlled using listeners\&. The default listener options can be overridden and further listeners can be created\&.
+The network ports that openmqtt listens on can be controlled using listeners\&. The default listener options can be overridden and further listeners can be created\&.
 
 		.SS "General Options"
 
@@ -729,7 +729,7 @@ The network ports that minion listens on can be controlled using listeners\&. Th
 
 					
 					
-						Listen for incoming network connections on the specified IP address/hostname only\&. This is useful to restrict access to certain network interfaces\&. To restrict access to minion to the local host only, use "bind_address localhost"\&. This only applies to the default listener\&. Use the listener variable to control other listeners\&.
+						Listen for incoming network connections on the specified IP address/hostname only\&. This is useful to restrict access to certain network interfaces\&. To restrict access to openmqtt to the local host only, use "bind_address localhost"\&. This only applies to the default listener\&. Use the listener variable to control other listeners\&.
 .sp
 
 						Not reloaded on reload signal\&.
@@ -763,7 +763,7 @@ option\&.
 					
 						Limit the total number of clients connected for the current listener\&. Set to
 \-1
-to have "unlimited" connections\&. Note that other limits may be imposed that are outside the control of minion\&. See e\&.g\&.
+to have "unlimited" connections\&. Note that other limits may be imposed that are outside the control of openmqtt\&. See e\&.g\&.
 \fBlimits.conf\fR(5)\&.
 .sp
 
@@ -1191,7 +1191,7 @@ as normal\&.
 					Set the start type of the bridge\&. This controls how the bridge starts and can be one of three types:
 \fIautomatic\fR,
 \fIlazy \fRand
-\fIonce\fR\&. Note that RSMB provides a fourth start type "manual" which isn\*(Aqt currently supported by minion\&.
+\fIonce\fR\&. Note that RSMB provides a fourth start type "manual" which isn\*(Aqt currently supported by openmqtt\&.
 .sp
 
 
@@ -1401,10 +1401,10 @@ option if you have messages arriving on unexpected topics when using incoming to
 \fBExample\ \&Bridge Topic Remapping.\ \&\fR
 
 						The configuration below connects a bridge to the broker at
-\fBtest\&.minion\&.org\fR\&. It subscribes to the remote topic
+\fBtest\&.openmqtt\&.org\fR\&. It subscribes to the remote topic
 \fB$SYS/broker/clients/total\fR
 and republishes the messages received to the local topic
-\fBtest/minion/org/clients/total\fR
+\fBtest/openmqtt/org/clients/total\fR
 
 						
 .sp
@@ -1412,10 +1412,10 @@ and republishes the messages received to the local topic
 .RS 4
 .\}
 .nf
-connection test\-minion\-org
-address test\&.minion\&.org
+connection test\-openmqtt\-org
+address test\&.openmqtt\&.org
 cleansession true
-topic clients/total in 0 test/minion/org $SYS/broker/
+topic clients/total in 0 test/openmqtt/org $SYS/broker/
 .fi
 .if n \{\
 .RE
@@ -1593,7 +1593,7 @@ and
 
 		
 		.PP
-minion\&.conf
+openmqtt\&.conf
 
 	
 
@@ -1601,16 +1601,16 @@ minion\&.conf
 
 		
 		.PP
-\fBminion\fR
+\fBopenmqtt\fR
 bug information can be found at
-http://launchpad\&.net/minion
+http://launchpad\&.net/openmqtt
 
 	
 
 	.SH "SEE ALSO"
 
 		
-		\fBminion\fR(8), \fBminion_passwd\fR(1), \fBminion-tls\fR(7), \fBmqtt\fR(7), \fBlimits.conf\fR(5)
+		\fBopenmqtt\fR(8), \fBopenmqtt_passwd\fR(1), \fBopenmqtt-tls\fR(7), \fBmqtt\fR(7), \fBlimits.conf\fR(5)
 
 	
 
