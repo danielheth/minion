@@ -1,5 +1,5 @@
-# Minion
-Minions are computers running the minion service and designed to interact with the central Minion MQTT broker service.
+# Mqtt
+OpenMqtt is striving to provide a management application for use across multiple platforms and uses the MQTT communications protocol.  The mqtt agent is being built to link into the OpenMqtt.org broker network and allow communications and control of millions of computers.
 
 ## Compiling Your Own Minions
 Compiling is extremely easy but does require a few things.
