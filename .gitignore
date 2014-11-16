@@ -131,3 +131,6 @@ node_modules
 
 # ignore sftp configuration file
 sftp-config.json
+
+### Ignore Compiled
+*.o
