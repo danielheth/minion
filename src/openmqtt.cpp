@@ -77,9 +77,6 @@ bool openmqtt::init_connection()
             << " (" << port
             << ")\n";
 
-	std::string guid = newUUID();
-	std::cout << "guid=" << guid << "\n";
-
 	/* Connect immediately. This could also be done by calling
 	 * openmqtt->connect(). */
 	if (url.length() > 0) {
@@ -121,7 +118,9 @@ void openmqtt::on_message(const struct mosquitto_message *message)
 };
 
 
-
+//Usage:
+//std::string guid = newUUID();
+//std::cout << "guid=" << guid << "\n";
 std::string openmqtt::newUUID() {
 #ifdef WIN32
     UUID uuid;
