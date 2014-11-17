@@ -7,10 +7,10 @@ http://code.google.com/p/inih/
 
 */
 
+
 #ifndef __INI_H__
 #define __INI_H__
 
-/* Make this header file easier to include in C++ code */
 #ifdef __cplusplus
 extern "C" {
 #endif

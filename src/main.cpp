@@ -30,9 +30,6 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <string>
 #include <stdio.h>
 #include <iostream>
-#include <fstream>
-#include "ini.h"
-#include "inireader.h"
 #include <mosquittopp.h>
 #include "openmqtt.h"
 
@@ -48,67 +45,23 @@ bool fexists(const std::string& filename)
 
 int main(int argc, char *argv[])
 {
-  std::fstream fs;
-  std::string server_url;
-  int server_port;
-  std::string server_cert;
-  
-  INIReader reader("openmqtt.conf");
-
-  if (reader.ParseError() < 0) {
-        //std::cout << "Can't load 'openmqtt.conf'\n";
-        printf("Can't load 'openmqtt.conf'!");
-        return 1;
-  }
-  server_url = reader.Get("SERVER", "url", "");
-  server_port = reader.GetInteger("SERVER", "port", 1883);
-  server_cert = reader.Get("SERVER", "cert", "");
-  if (server_cert.length() > 0) {
-    fs.open (server_cert.c_str());
-    if (fs.is_open() != true) {
-        //std:cout << "Specified cert file does not exist!\n";
-        printf("Specified cert file does not exist!");
-        return 1;
-    }
-    fs.close();
-  }
-
-  /*
-  std::cout << "Config loaded from 'openmqtt.conf': "
-            << "url=" << reader.Get("SERVER", "url", "")
-            << ", port=" << reader.GetInteger("SERVER", "port", -1)
-            << ", cert=" << reader.Get("SERVER", "cert", "")
-            << "\n";
-  */
-
-  //std::cout << "downloading uuidgen...";
-  //HRESULT hr = URLDownloadToFile ( NULL, _T("https://filerepo.org/uuidgen.exe"), _T("uuidgen.exe"), 0, NULL );
-  //std::cout << "Done!" << endl;
-
-
-  class mqtt_openmqtt *openmqtt;
   int rc;
+  class openmqtt *om;
 
   mosqpp::lib_init();
+  om = new openmqtt("openmqtt");
 
-  openmqtt = new mqtt_openmqtt("openmqtt", server_url.c_str(), server_port);
-  
-  while(1){
-    rc = openmqtt->loop();
-    if(rc){
-      openmqtt->reconnect();
+  if (om->init_connection()) {
+    while(1) {
+      rc = om->loop();
+      if(rc) {
+        om->reconnect();
+      }
     }
+  } else {
+    std::cout << "Unable to connect to network.";
   }
-
+  
   mosqpp::lib_cleanup();
-
-
-
   return(0);
 }
-
-
-
-
-
-

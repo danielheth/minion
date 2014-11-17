@@ -30,14 +30,21 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef OPENMQTT_H
 #define OPENMQTT_H
 
+#include <string>
 #include <mosquittopp.h>
 
-class mqtt_openmqtt : public mosqpp::mosquittopp
+class openmqtt : public mosqpp::mosquittopp
 {
-	public:
-		mqtt_openmqtt(const char *id, const char *host, int port);
-		~mqtt_openmqtt();
+private:
 
+public:
+	std::string url;
+	int port;
+	std::string cert;
+
+	openmqtt(const char *id);
+		~openmqtt();
+		bool init_connection();
 		void on_connect(int rc);
 		void on_message(const struct mosquitto_message *message);
 		void on_subscribe(int mid, int qos_count, const int *granted_qos);

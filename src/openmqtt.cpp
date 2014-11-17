@@ -31,27 +31,77 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <cstring>
 
 #include "openmqtt.h"
-#include <mosquittopp.h>
 
-mqtt_openmqtt::mqtt_openmqtt(const char *id, const char *host, int port) : mosquittopp(id)
+#include <iostream>
+#include <fstream>
+#include "ini.h"
+#include "inireader.h"
+
+#include <mosquittopp.h>
+#include <iostream>
+
+openmqtt::openmqtt(const char *id) : mosquittopp(id)
+{
+	//FIRST LOAD THE CONFIGURATION FILE AND ALL VALUES
+	std::fstream fs;
+
+	INIReader reader("openmqtt.conf");
+
+	if (reader.ParseError() < 0) {
+		//can't open local conf file, try system conf file
+		INIReader reader("/etc/openmqtt/openmqtt.conf");
+		if (reader.ParseError() < 0) {
+			//std::cout << "Can't load 'openmqtt.conf'\n";
+			printf("Can't load 'openmqtt.conf'!");
+		}
+	}
+	url = reader.Get("NETWORK", "url", "");
+	port = reader.GetInteger("NETWORK", "port", 1883);
+	cert = reader.Get("NETWORK", "cert", "");
+	if (cert.length() > 0) {
+		fs.open(cert.c_str());
+		if (fs.is_open() != true) {
+		    //std:cout << "Specified cert file does not exist!\n";
+		    printf("Specified cert file does not exist!");
+		}
+		fs.close();
+	}
+};
+
+bool openmqtt::init_connection() 
 {
 	int keepalive = 60;
 
+	std::cout << "Initiating connection to "
+            << "" << url
+            << " (" << port
+            << ")\n";
+
 	/* Connect immediately. This could also be done by calling
-	 * mqtt_openmqtt->connect(). */
-	connect(host, port, keepalive);
+	 * openmqtt->connect(). */
+	if (url.length() > 0) {
+		connect(url.c_str(), port, keepalive);
+		return 1;
+	} else {
+		return 0;
+	}
 };
 
-void mqtt_openmqtt::on_connect(int rc)
+void openmqtt::on_connect(int rc)
 {
 	printf("Connected with code %d.\n", rc);
-	if(rc == 0){
+	if (rc == 0) {
 		/* Only attempt to subscribe on a successful connect. */
 		subscribe(NULL, "temperature/celsius");
 	}
 }
 
-void mqtt_openmqtt::on_message(const struct mosquitto_message *message)
+void openmqtt::on_subscribe(int mid, int qos_count, const int *granted_qos)
+{
+	printf("Subscription succeeded.\n");
+}
+
+void openmqtt::on_message(const struct mosquitto_message *message)
 {
 	double temp_celsius, temp_farenheit;
 	char buf[51];
@@ -67,8 +117,5 @@ void mqtt_openmqtt::on_message(const struct mosquitto_message *message)
 	}
 }
 
-void mqtt_openmqtt::on_subscribe(int mid, int qos_count, const int *granted_qos)
-{
-	printf("Subscription succeeded.\n");
-}
+
 
