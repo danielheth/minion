@@ -30,6 +30,15 @@ POSSIBILITY OF SUCH DAMAGE.
 #ifndef OPENMQTT_H
 #define OPENMQTT_H
 
+extern "C"
+{
+#ifdef WIN32
+#include <Rpc.h>
+#else
+#include <uuid/uuid.h>
+#endif
+}
+
 #include <string>
 #include <mosquittopp.h>
 
@@ -48,6 +57,9 @@ public:
 		void on_connect(int rc);
 		void on_message(const struct mosquitto_message *message);
 		void on_subscribe(int mid, int qos_count, const int *granted_qos);
+		std::string newUUID();
 };
 
 #endif
+
+

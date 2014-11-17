@@ -10,6 +10,7 @@ The following packages are required for openmqtt:
 * openssl (version 1.0.0 or greater if TLS-PSK support is needed)
 * On Windows, the Redhat pthreads library is required if threading support is
   to be included.
+*  sudo apt-get install uuid-dev
 
 To compile, run "make", but also see the file config.mk for more details on the
 various options that can be compiled in.

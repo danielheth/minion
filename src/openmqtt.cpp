@@ -77,6 +77,9 @@ bool openmqtt::init_connection()
             << " (" << port
             << ")\n";
 
+	std::string guid = newUUID();
+	std::cout << "guid=" << guid << "\n";
+
 	/* Connect immediately. This could also be done by calling
 	 * openmqtt->connect(). */
 	if (url.length() > 0) {
@@ -94,12 +97,12 @@ void openmqtt::on_connect(int rc)
 		/* Only attempt to subscribe on a successful connect. */
 		subscribe(NULL, "temperature/celsius");
 	}
-}
+};
 
 void openmqtt::on_subscribe(int mid, int qos_count, const int *granted_qos)
 {
 	printf("Subscription succeeded.\n");
-}
+};
 
 void openmqtt::on_message(const struct mosquitto_message *message)
 {
@@ -115,7 +118,26 @@ void openmqtt::on_message(const struct mosquitto_message *message)
 		snprintf(buf, 50, "%f", temp_farenheit);
 		publish(NULL, "temperature/farenheit", strlen(buf), buf);
 	}
-}
+};
 
 
 
+std::string openmqtt::newUUID() {
+#ifdef WIN32
+    UUID uuid;
+    UuidCreate ( &uuid );
+
+    unsigned char * str;
+    UuidToStringA ( &uuid, &str );
+
+    std::string s( ( char* ) str );
+
+    RpcStringFreeA ( &str );
+#else
+    uuid_t uuid;
+    uuid_generate_random ( uuid );
+    char s[37];
+    uuid_unparse ( uuid, s );
+#endif
+    return s;
+};
